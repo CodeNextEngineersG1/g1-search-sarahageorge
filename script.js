@@ -55,4 +55,63 @@ display = document.getElementbyId("display")
   searchBar.addEventListener("keypress", checkKey);
   searchButton.addEventListener("click", processInput);
 
+  function checkKey(e) {
+  var key = e.which || e.keyCode;
+  if(key == 13) {
+  	processInput() 
+    //console.log(“You pressed enter!”);
+  }
+}
+
+processInput(){
+
+	var cleanedInput = searchBar.value.toLowerCase().trim()
+	autoSuggestions.innerHTML = ""
+	autoSuggestions.style.display = "none"
+	searchBar = ""
+	var databaseRecord = getRecord(cleanedInput)
+
+	if databaseRecord != null {
+		displayRecord(databaseRecord)
+	} else{
+		alert(“No results.”)
+	}
+
+}
+
+getRecord(cleanedInput){
+	
+	var i;
+	for (i = 0; i < database.length; i++) { 
+    	var cleanedRecordName = database[i].name.toLowerCase().trim();
+    	if (cleanedInput == cleanedRecordName){
+    		databaseRecord
+    	}
+	}
+	return null
+	}
+
+displayRecord(databaseRecord){
+
+	var recordName = document.createElement("h2");
+		recordName.innerHTML = databaseRecord.name;
+	var recordEthnicity = document.createElement("h2");
+		recordEthnicity.innerHTML = databaseRecord.ethnicity;
+	var recordGoal = document.createElement("h2");
+		recordGoal.innerHTML = databaseRecord.goal;
+	var recordPicture = document.createElement("img");
+		recordPicture.src = databaseRecord.picture;
+	var recordBio = document.createElement("h2");
+		recordGoal.innerHTML = databaseRecord.bio;
+
+	display.appendChild(recordName);
+	display.appendChild(recordEthnicity);
+	display.appendChild(recordGoal);
+	display.appendChild(recordPicture);
+	display.appendChild(recordBio);
+
+
+	}
+
+}
 
